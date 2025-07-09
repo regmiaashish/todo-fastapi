@@ -67,7 +67,8 @@ This is a backend API for a **Personal To-Do List** application built using **Fa
 ### ➕ Create To-Do
 ```json
 {
-  "task": "Buy groceries"
+  "task": "Buy groceries", 
+   "completed": false 
 }
 ```
 
