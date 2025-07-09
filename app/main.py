@@ -18,9 +18,9 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 
-
-# ---------- Auth Endpoints ----------
-
+@app.get("/")
+def main():
+    return {"message":"its working for CrawlerHub"}
 
 @app.post("/register", response_model=schemas.User)
 def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -44,8 +44,8 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 @app.post("/token")
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = auth.authenticate_user(db, form_data.username, form_data.password)
+def login(user_login: schemas.UserLogin, db: Session = Depends(get_db)):
+    user = auth.authenticate_user(db, user_login.email, user_login.password)
     if not user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
     access_token = auth.create_access_token(

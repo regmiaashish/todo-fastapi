@@ -1,8 +1,7 @@
-from pydantic import BaseModel, EmailStr
-from typing import Optional, List
+from pydantic import BaseModel, EmailStr, ConfigDict
+from typing import Optional
 from datetime import datetime
 
-# User Schemas
 class UserBase(BaseModel):
     full_name: str
     email: EmailStr
@@ -10,13 +9,14 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
 class User(UserBase):
     id: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
-
-# Todo Schemas
 class TodoBase(BaseModel):
     task: str
     completed: Optional[bool] = False
@@ -33,6 +33,4 @@ class Todo(TodoBase):
     created_at: datetime
     updated_at: Optional[datetime]
     owner: User
-
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
