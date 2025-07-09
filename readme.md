@@ -112,7 +112,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES=60
 
 ### 5. Run migrations and start server
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ---
