@@ -1,12 +1,12 @@
 from fastapi import FastAPI, Depends, HTTPException
-from fastapi.security import OAuth2PasswordRequestForm
+# from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import timedelta
 from dotenv import load_dotenv
 import os
 
 from . import models, schemas, auth
-from .database import SessionLocal, engine, get_db
+from .database import engine, get_db
 
 # Load environment variables
 load_dotenv()
